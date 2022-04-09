@@ -1,33 +1,14 @@
 const express = require('express');
- const router = express.Router();
-const usercontroller = require("../controllers/userController")
-const bookController = require("../controllers/bookController")
-const reviewsController = require("../controllers/reviewsController")
-const middleware = require("../middleware/auth")
+const router = express.Router();
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+//Importing the handler functions of urlController
+const { shortenUrl, getUrl }= require("../controllers/urlController")
 
-router.post("/user", usercontroller.createUser)
-router.post("/login", usercontroller.loginUser)
+//First API -: To take longUrl in request body and make shortUrl of it using POST method
+router.post("/url/shorten" , shortenUrl)
 
-router.post("/book",middleware.authenticate, middleware.authorise, bookController.createBook)
+//Second API -: To redirect to originalUrl by taking urlCode in path params by GET method
+router.get("/:urlCode" , getUrl)
 
-router.get("/allBooks",middleware.authenticate,  bookController.getBook)
-
-router.get("/allBooks/:bookId",middleware.authenticate,bookController.getBookById)
-
-router.put("/updateBook/:bookId",middleware.authenticate,middleware.authorise, bookController.updateBook)
-
-router.delete("/deleteById/book/:bookId",middleware.authenticate, middleware.authorise, bookController.deleteById)
-
-router.post("/createReview/book/:bookId", reviewsController.createReview)
-
-router.put("/book/:bookId/:reviewId", reviewsController.updateReview)
-router.delete("/book/:bookId/:reviewId", reviewsController.deleteReview)
-//PUT /books/:bookId/review/:reviewId
-//DELETE /books/:bookId/review/:reviewId
-
+//Exporting route file
 module.exports = router;
-

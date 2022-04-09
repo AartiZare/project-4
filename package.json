@@ -17,6 +17,11 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^6.2.3",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "promisify": "^0.0.3",
+    "redis": "^3.1.2",
+    "shortid": "^2.2.16",
+    "util": "^0.12.4",
+    "valid-url": "^1.0.9"
   }
 }
